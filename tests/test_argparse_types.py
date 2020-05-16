@@ -6,6 +6,11 @@ import pytest
 import argparse_types
 
 
+def _raises_test_case(func, *args):
+    with pytest.raises(argparse_types.argparse.ArgumentTypeError):
+        func(*args)
+
+
 @pytest.mark.parametrize("test_values, expected_result", [
     ("1", 1),
     ("100", 100),
@@ -20,8 +25,7 @@ def test_pos_int(test_values, expected_result):
     "0", "-1", "-500000", "letters", "1.1", "-1.1"
 ])
 def test_pos_int_fails(test_values):
-    with pytest.raises(argparse_types.argparse.ArgumentTypeError):
-        argparse_types.pos_int(test_values)
+    _raises_test_case(argparse_types.pos_int, test_values)
 
 
 @pytest.mark.parametrize("test_values, expected_result", [
@@ -38,8 +42,7 @@ def test_neg_int(test_values, expected_result):
     "0", "1", "500000", "letters", "1.1", "-1.1"
 ])
 def test_neg_int_fails(test_values):
-    with pytest.raises(argparse_types.argparse.ArgumentTypeError):
-        argparse_types.neg_int(test_values)
+    _raises_test_case(argparse_types.neg_int, test_values)
 
 
 def test_zero_int():
@@ -56,5 +59,4 @@ def test_zero_int_multiple_zeroes():
     "1", "50000", "letters", "-1", "-50000", "1.1", "-1.1"
 ])
 def test_zero_int_fails(test_values):
-    with pytest.raises(argparse_types.argparse.ArgumentTypeError):
-        argparse_types.zero_int(test_values)
+    _raises_test_case(argparse_types.zero_int, test_values)
