@@ -9,5 +9,6 @@ setup(
     author='chad',
     author_email='',
     description='extra argparse types'
+    install_requires=['pytest']
 )
 """
