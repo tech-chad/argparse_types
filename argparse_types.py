@@ -27,3 +27,18 @@ def neg_int(value: str) -> int:
         else:
             return int_value
 
+
+def zero_int(value: str) -> int:
+    """ Zero int value. """
+    # will allow a string with multiple zeroes to work and return
+    # in single int 0.  Not sure if this should be.
+    error_msg = f"{value} is an invalid zero int value"
+    try:
+        int_value = int(value)
+    except ValueError:
+        raise argparse.ArgumentTypeError(error_msg)
+    else:
+        if int_value != 0:
+            raise argparse.ArgumentTypeError(error_msg)
+        else:
+            return int_value

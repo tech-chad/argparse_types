@@ -40,3 +40,21 @@ def test_neg_int(test_values, expected_result):
 def test_neg_int_fails(test_values):
     with pytest.raises(argparse_types.argparse.ArgumentTypeError):
         argparse_types.neg_int(test_values)
+
+
+def test_zero_int():
+    result = argparse_types.zero_int("0")
+    assert result == 0
+
+
+def test_zero_int_multiple_zeroes():
+    result = argparse_types.zero_int("0000")
+    assert result == 0
+
+
+@pytest.mark.parametrize("test_values", [
+    "1", "50000", "letters", "-1", "-50000", "1.1", "-1.1"
+])
+def test_zero_int_fails(test_values):
+    with pytest.raises(argparse_types.argparse.ArgumentTypeError):
+        argparse_types.zero_int(test_values)
