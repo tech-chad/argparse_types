@@ -13,3 +13,17 @@ def pos_int(value: str) -> int:
             raise argparse.ArgumentTypeError(error_msg)
         else:
             return int_value
+
+
+def neg_int(value: str) -> int:
+    error_msg = f"{value} is an invalid negative int value"
+    try:
+        int_value = int(value)
+    except ValueError:
+        raise argparse.ArgumentTypeError(error_msg)
+    else:
+        if int_value >= 0:
+            raise argparse.ArgumentTypeError(error_msg)
+        else:
+            return int_value
+
