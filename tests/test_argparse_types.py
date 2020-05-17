@@ -60,3 +60,59 @@ def test_zero_int_multiple_zeroes():
 ])
 def test_zero_int_fails(test_values):
     _raises_test_case(argparse_types.zero_int, test_values)
+
+
+@pytest.mark.parametrize("test_values, expected_results", [
+    ("1.1", 1.1),
+    ("200.23", 200.23),
+    ("45000.650", 45000.650)
+])
+def test_pos_float(test_values, expected_results):
+    result = argparse_types.pos_float(test_values)
+    assert result == expected_results
+
+
+@pytest.mark.parametrize("test_values", [
+    "0", "0.0", "-25.50", "-5", "5", "string", "52500"
+])
+def test_pos_float_fails(test_values):
+    _raises_test_case(argparse_types.pos_float, test_values)
+
+
+@pytest.mark.parametrize("test_values, expected_results", [
+    ("-1.1", 1.1),
+    ("-350.0", -350.0),
+    ("-80250.250", -80250.250)
+])
+def test_neg_float(test_values, expected_results):
+    result = argparse_types.neg_float(test_values)
+    assert result == expected_results
+
+
+@pytest.mark.parametrize("test_values", [
+    "0", "0.0", "25.25", "500", "-500", "string"
+])
+def test_neg_float(test_values):
+    _raises_test_case(argparse_types.neg_float, test_values)
+
+
+def test_zero_float():
+    result = argparse_types.zero_float("0.0")
+    assert result == 0.0
+
+
+@pytest.mark.parametrize("test_values, expected_results", [
+    ("0.000", 0.0),
+    ("00.0", 0.0),
+    ("00.00", 0.0),
+])
+def test_zero_float_multiple_zeroes(test_values, expected_results):
+    result = argparse_types.zero_float(test_values)
+    assert result == expected_results
+
+
+@pytest.mark.parametrize("test_values", [
+    "-5", "-5.5", "5", "-500", "string",
+])
+def test_zero_float_fail(test_values):
+    _raises_test_case(argparse_types.zero_float, test_values)

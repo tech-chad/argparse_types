@@ -65,6 +65,57 @@ def test_zero_int_full(test_values, expected_results):
     "-34", "100", "string", "1.1", ":*&"
 ])
 def test_neg_int_full_fail(test_values, capsys):
+    # FIXME fix test name to test_zero_int_full_fail
     _argparse_runner_raises(argparse_types.zero_int, test_values)
     captured = capsys.readouterr().err
     assert f"{test_values} is an invalid zero int value" in captured
+
+
+@pytest.mark.parametrize("test_values, expect_results", [
+    ("25.0", 25.0),
+    ("352.25", 352.25),
+])
+def test_pos_float_full(test_values, expect_results):
+    result = _argparse_runner(argparse_types.pos_float, test_values)
+    assert result == expect_results
+
+
+@pytest.mark.parametrize("test_values", [
+    "0", "-2.25", "string", "300",
+])
+def test_pos_float_full_fail(test_values, capsys):
+    _argparse_runner_raises(argparse_types.pos_float, test_values)
+    captured = capsys.readouterr().err
+    assert f"{test_values} is an invalid positive float" in captured
+
+
+@pytest.mark.parametrize("test_values, expected_results", [
+    ("-25.25", -25.25),
+    ("-500.0", -500.0),
+])
+def test_neg_float_full(test_values, expected_results):
+    result = _argparse_runner(argparse_types.neg_float, test_values)
+    assert result == expected_results
+
+
+@pytest.mark.parametrize("test_values", [
+    "0", "2.25", "-25", "string"
+])
+def test_neg_float_full_fail(test_values, capsys):
+    _argparse_runner_raises(argparse_types.neg_float, test_values)
+    captured = capsys.readouterr().err
+    assert f"{test_values} is an invalid negative float" in captured
+
+
+def test_zero_float_full():
+    result = _argparse_runner(argparse_types.zero_float, "0.0")
+    assert result == 0.0
+
+
+@pytest.mark.parametrize("test_values", [
+    "1.1", "-200.0", "200", "500.50", "string",
+])
+def test_zero_float_full_fails(test_values, capsys):
+    _argparse_runner_raises(argparse_types.zero_float, test_values)
+    captured = capsys.readouterr().err
+    assert f"{test_values} is an invalid zero float"

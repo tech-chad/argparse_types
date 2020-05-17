@@ -42,3 +42,54 @@ def zero_int(value: str) -> int:
             raise argparse.ArgumentTypeError(error_msg)
         else:
             return int_value
+
+
+def pos_float(value: str) -> float:
+    """ Positive float value not including 0 """
+    error_msg = f"{value} is an invalid positive float"
+    if value.isdigit():
+        raise argparse.ArgumentTypeError(error_msg)
+    else:
+        try:
+            float_value = float(value)
+        except ValueError:
+            raise argparse.ArgumentTypeError(error_msg)
+        else:
+            if float_value <= 0.0:
+                raise argparse.ArgumentTypeError(error_msg)
+            else:
+                return float_value
+
+
+def neg_float(value: str) -> float:
+    """ Negative float value not including 0 """
+    error_msg = f"{value} is an invalid negative float"
+    if value.isdigit() or value.find(".") == -1:
+        raise argparse.ArgumentTypeError(error_msg)
+    else:
+        try:
+            float_value = float(value)
+        except ValueError:
+            raise argparse.ArgumentTypeError(error_msg)
+        else:
+            if float_value >= 0.0:
+                raise argparse.ArgumentTypeError(error_msg)
+            else:
+                return float_value
+
+
+def zero_float(value: str) -> float:
+    """ Negative float value not including 0 """
+    error_msg = f"{value} is an invalid zero float"
+    if value.isdigit() or value.find(".") == -1:
+        raise argparse.ArgumentTypeError(error_msg)
+    else:
+        try:
+            float_value = float(value)
+        except ValueError:
+            raise argparse.ArgumentTypeError(error_msg)
+        else:
+            if float_value != 0.0:
+                raise argparse.ArgumentTypeError(error_msg)
+            else:
+                return float_value
