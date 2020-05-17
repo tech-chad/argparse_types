@@ -117,7 +117,7 @@ def test_zero_float_full():
 def test_zero_float_full_fails(test_values, capsys):
     _argparse_runner_raises(argparse_types.zero_float, test_values)
     captured = capsys.readouterr().err
-    assert f"{test_values} is an invalid zero float"
+    assert f"{test_values} is an invalid zero float" in captured
 
 
 @pytest.mark.parametrize("test_values", [
