@@ -64,8 +64,7 @@ def test_zero_int_full(test_values, expected_results):
 @pytest.mark.parametrize("test_values", [
     "-34", "100", "string", "1.1", ":*&"
 ])
-def test_neg_int_full_fail(test_values, capsys):
-    # FIXME fix test name to test_zero_int_full_fail
+def test_zero_int_full_fail(test_values, capsys):
     _argparse_runner_raises(argparse_types.zero_int, test_values)
     captured = capsys.readouterr().err
     assert f"{test_values} is an invalid zero int value" in captured
