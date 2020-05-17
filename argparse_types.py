@@ -1,5 +1,7 @@
 import argparse
 
+from typing import Union
+
 
 def pos_int(value: str) -> int:
     """ Positive int value not including 0"""
@@ -95,6 +97,19 @@ def zero_float(value: str) -> float:
                 return float_value
 
 
+def bool_none(value: str) -> Union[bool, None]:
+    """ String True, False or None and return types bool or None."""
+    error_msg = f"{value} is an invalid bool or none"
+    if value == "True":
+        return True
+    elif value == "False":
+        return False
+    elif value == "None":
+        return None
+    else:
+        raise argparse.ArgumentTypeError(error_msg)
+
+
 def ip4(value: str) -> str:
     error_msg = f"{value} is an invalid ip4 address"
     try:
@@ -108,4 +123,3 @@ def ip4(value: str) -> str:
         raise argparse.ArgumentTypeError(error_msg)
     else:
         return value
-

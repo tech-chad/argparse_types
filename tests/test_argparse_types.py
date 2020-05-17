@@ -118,6 +118,24 @@ def test_zero_float_fail(test_values):
     _raises_test_case(argparse_types.zero_float, test_values)
 
 
+@pytest.mark.parametrize("test_values, expected_results", [
+    ("True", True),
+    ("False", False),
+    ("None", None),
+])
+def test_bool_none(test_values, expected_results):
+    result = argparse_types.bool_none(test_values)
+    assert result == expected_results
+
+
+@pytest.mark.parametrize("test_values", [
+    "0", " ", "string", "1234", "25.25", "-34", "-34.34",
+    "true", "false", "none", "NONE", "TRUE", "FALSE", "NULL",
+])
+def test_bool_none_fail(test_values):
+    _raises_test_case(argparse_types.bool_none, test_values)
+
+
 @pytest.mark.parametrize("test_values", [
     "192.168.0.1", "0.0.0.0", "127.0.0.0", "255.255.255.255"
 ])

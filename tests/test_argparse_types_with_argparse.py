@@ -120,6 +120,26 @@ def test_zero_float_full_fails(test_values, capsys):
     assert f"{test_values} is an invalid zero float" in captured
 
 
+@pytest.mark.parametrize("test_values, expected_results", [
+    ("True", True),
+    ("False", False),
+    ("None", None),
+])
+def test_bool_none_full(test_values, expected_results):
+    result = _argparse_runner(argparse_types.bool_none, test_values)
+    assert result == expected_results
+
+
+@pytest.mark.parametrize("test_values", [
+    "34344", "string", "-34.34",
+    "true", "FALSE", "none"
+])
+def test_bool_none_full_fails(test_values, capsys):
+    _argparse_runner_raises(argparse_types.bool_none, test_values)
+    captured = capsys.readouterr().err
+    assert f"{test_values} is an invalid bool or none" in captured
+
+
 @pytest.mark.parametrize("test_values", [
     "0.0.0.0", "127.0.0.0", "192.168.1.50", "255.255.255.255",
 ])
