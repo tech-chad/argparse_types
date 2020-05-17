@@ -93,3 +93,19 @@ def zero_float(value: str) -> float:
                 raise argparse.ArgumentTypeError(error_msg)
             else:
                 return float_value
+
+
+def ip4(value: str) -> str:
+    error_msg = f"{value} is an invalid ip4 address"
+    try:
+        split_value = value.split(".")
+        if len(split_value) != 4:
+            raise argparse.ArgumentTypeError(error_msg)
+        for i, v in enumerate(split_value):
+            if int(v) < 0 or int(v) > 255:
+                raise argparse.ArgumentTypeError(error_msg)
+    except (IndexError, ValueError):
+        raise argparse.ArgumentTypeError(error_msg)
+    else:
+        return value
+

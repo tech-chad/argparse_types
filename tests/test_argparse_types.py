@@ -116,3 +116,20 @@ def test_zero_float_multiple_zeroes(test_values, expected_results):
 ])
 def test_zero_float_fail(test_values):
     _raises_test_case(argparse_types.zero_float, test_values)
+
+
+@pytest.mark.parametrize("test_values", [
+    "192.168.0.1", "0.0.0.0", "127.0.0.0", "255.255.255.255"
+])
+def test_ip4(test_values):
+    result = argparse_types.ip4(test_values)
+    assert result == test_values
+
+
+@pytest.mark.parametrize("test_values", [
+    "19216801", "300.300.300.300", "string", "-500", "192.168.2.98:120",
+    "0.0.0", "192.300.5.1", "1.2.3", "192.168.3.55.120", "192.sdf.30.5",
+    "192.168.1.256", "192.168.1.1-100", "192.168..1", "192,168,2,100",
+])
+def test_ip4_fail(test_values):
+    _raises_test_case(argparse_types.ip4, test_values)

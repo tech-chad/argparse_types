@@ -118,3 +118,21 @@ def test_zero_float_full_fails(test_values, capsys):
     _argparse_runner_raises(argparse_types.zero_float, test_values)
     captured = capsys.readouterr().err
     assert f"{test_values} is an invalid zero float"
+
+
+@pytest.mark.parametrize("test_values", [
+    "0.0.0.0", "127.0.0.0", "192.168.1.50", "255.255.255.255",
+])
+def test_ip4_full(test_values):
+    result = _argparse_runner(argparse_types.ip4, test_values)
+    assert result == test_values
+
+
+@pytest.mark.parametrize("test_values", [
+    "-255", "1.2.3", "192.168.1.356", "192.168.0.50:130", "string",
+    "192.168.1.1.1",
+])
+def test_ip4_full_fail(test_values, capsys):
+    _argparse_runner_raises(argparse_types.ip4, test_values)
+    captured = capsys.readouterr().err
+    assert f"{test_values} is an invalid ip4 address" in captured
