@@ -31,7 +31,7 @@ def test_pos_int_full(test_values, expected_results):
 def test_pos_int_full_fail(test_values, capsys):
     _argparse_runner_raises(argparse_types.pos_int, test_values)
     captured = capsys.readouterr().err
-    assert f"{test_values} is not a positive int" in captured
+    assert f"{test_values} is an invalid positive int value" in captured
 
 
 @pytest.mark.parametrize("test_values, expected_results", [

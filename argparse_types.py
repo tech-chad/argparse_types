@@ -5,7 +5,7 @@ from typing import Union
 
 def pos_int(value: str) -> int:
     """ Positive int value not including 0"""
-    error_msg = f"{value} is not a positive int"
+    error_msg = f"{value} is an invalid positive int value"
     try:
         int_value = int(value)
     except ValueError:
@@ -18,6 +18,7 @@ def pos_int(value: str) -> int:
 
 
 def neg_int(value: str) -> int:
+    """ Negative int value not including 0 """
     error_msg = f"{value} is an invalid negative int value"
     try:
         int_value = int(value)
@@ -111,6 +112,10 @@ def bool_none(value: str) -> Union[bool, None]:
 
 
 def ip4(value: str) -> str:
+    """
+    ip address 0.0.0.0 to 255.255.255.255. raises error if
+    port is given too.
+    """
     error_msg = f"{value} is an invalid ip4 address"
     try:
         split_value = value.split(".")
@@ -123,3 +128,7 @@ def ip4(value: str) -> str:
         raise argparse.ArgumentTypeError(error_msg)
     else:
         return value
+
+
+if __name__ == "__main__":
+    pass
