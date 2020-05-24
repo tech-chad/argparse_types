@@ -3,7 +3,7 @@ argparse_types function test file
 """
 import pytest
 
-import argparse_types
+from argparse_types import argparse_types
 
 
 def _raises_test_case(func, *args):
