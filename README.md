@@ -4,18 +4,37 @@ Special argparse types
 
 ### How to install
 
-```to add```
+```pip install argparse-types```
 
 ### description
 
-Adds addition types to the argparse library.
+Additional types to use with argparse
 
 
 ###  how to use
 
+Import argparse_types pass the argparse_types."type" to the type keyword in argparse.add_argument.  Remember to pass not to call.
+
+example.py
 ```python
-# to add
+import argparse
+
+import argparse_types
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-n", dest="number", type=argparse_types.pos_int)
+args = parser.parse_args()
+print(args.number)
+
 ```
+```python3 example.py -n 34```
+
+>34
+
+```python3 example.py -n -34```
+
+>example.py: error: argument -n: -34 is an invalid positive int value
 
 ### types
 
