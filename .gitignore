@@ -1,3 +1,6 @@
 .mypy_cache
 /.pytest_cache
 .idea
+dist
+build
+argparse_types.egg-info
