@@ -1,7 +1,7 @@
 import argparse
 import pytest
 
-from argparse_types import argparse_types
+import argparse_types
 
 
 def _argparse_runner(test_type, test_values):
