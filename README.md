@@ -44,5 +44,6 @@ print(args.number)
 - **pos_float** - Positive float value not including 0
 - **neg_float** - Negative float value not including 0
 - **zero_float** - Zero float value
+- **int_float** - Any int or float value
 - **bool_none** - True, False, None value
 - **ip4** - ip address 0.0.0.0 to 255.255.255.255 not including port
