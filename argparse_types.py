@@ -82,7 +82,7 @@ def neg_float(value: str) -> float:
 
 
 def zero_float(value: str) -> float:
-    """ Negative float value not including 0 """
+    """ Zero float value """
     error_msg = f"{value} is an invalid zero float"
     if value.isdigit() or value.find(".") == -1:
         raise argparse.ArgumentTypeError(error_msg)
