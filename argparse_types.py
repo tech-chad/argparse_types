@@ -1,4 +1,5 @@
 import argparse
+import re
 
 from typing import Union
 
@@ -131,17 +132,12 @@ def ip4(value: str) -> str:
     port is given too.
     """
     error_msg = f"{value} is an invalid ip4 address"
-    try:
-        split_value = value.split(".")
-        if len(split_value) != 4:
-            raise argparse.ArgumentTypeError(error_msg)
-        for i, v in enumerate(split_value):
-            if int(v) < 0 or int(v) > 255:
-                raise argparse.ArgumentTypeError(error_msg)
-    except (IndexError, ValueError):
-        raise argparse.ArgumentTypeError(error_msg)
-    else:
+    ip4_re = re.compile(r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.)"
+                        "{3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
+    if ip4_re.match(value):
         return value
+    else:
+        raise argparse.ArgumentTypeError(error_msg)
 
 
 if __name__ == "__main__":

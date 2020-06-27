@@ -160,6 +160,7 @@ def test_bool_none_full_fails(test_values, capsys):
 
 @pytest.mark.parametrize("test_values", [
     "0.0.0.0", "127.0.0.0", "192.168.1.50", "255.255.255.255",
+    "10.6.40.1", "192.168.50.150", "1.1.1.1",
 ])
 def test_ip4_full(test_values):
     result = _argparse_runner(argparse_types.ip4, test_values)
@@ -168,7 +169,8 @@ def test_ip4_full(test_values):
 
 @pytest.mark.parametrize("test_values", [
     "-255", "1.2.3", "192.168.1.356", "192.168.0.50:130", "string",
-    "192.168.1.1.1",
+    "192.168.1.1.1", "192.300.5.5", "300.192.2.50", "168.192.300.50",
+    "168.192.5.300", "192168550", "192.168.1.1-50", "ip192.168.0.1",
 ])
 def test_ip4_full_fail(test_values, capsys):
     _argparse_runner_raises(argparse_types.ip4, test_values)
