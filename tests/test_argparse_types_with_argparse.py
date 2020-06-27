@@ -120,6 +120,24 @@ def test_zero_float_full_fails(test_values, capsys):
     assert f"{test_values} is an invalid zero float" in captured
 
 
+@pytest.mark.parametrize("test_values, expected_result", [
+    ("4534534", 4534534), ("-9000", -9000), ("900.00", 900.00),
+    ("-8773.3", -8773.3), ("-1.8192323", -1.8192323)
+])
+def test_int_float_full(test_values, expected_result):
+    result = _argparse_runner(argparse_types.int_float, test_values)
+    assert result == expected_result
+
+
+@pytest.mark.parametrize("test_values", [
+    "alpha", "232,900", "900a", "90%",
+])
+def test_int_float_full_fails(test_values, capsys):
+    _argparse_runner_raises(argparse_types.int_float, test_values)
+    captured = capsys.readouterr().err
+    assert f"{test_values} is invalid int or float" in captured
+
+
 @pytest.mark.parametrize("test_values, expected_results", [
     ("True", True),
     ("False", False),

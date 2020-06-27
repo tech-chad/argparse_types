@@ -98,6 +98,20 @@ def zero_float(value: str) -> float:
                 return float_value
 
 
+def int_float(value: str) -> Union[int, float]:
+    """ Any int or float number"""
+    error_msg = f"{value} is invalid int or float"
+    try:
+        int_value = int(value)
+        return int_value
+    except ValueError:
+        try:
+            float_value = float(value)
+            return float_value
+        except ValueError:
+            raise argparse.ArgumentTypeError(error_msg)
+
+
 def bool_none(value: str) -> Union[bool, None]:
     """ String True, False or None and return types bool or None."""
     error_msg = f"{value} is an invalid bool or none"

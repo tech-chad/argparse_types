@@ -118,6 +118,22 @@ def test_zero_float_fail(test_values):
     _raises_test_case(argparse_types.zero_float, test_values)
 
 
+@pytest.mark.parametrize("test_value, expected_result", [
+    ("1", 1), ("400", 400), ("0", 0), ("-400", -400),
+    ("1.5", 1.5), ("4564.99343", 4564.99343), ("-45.390", -45.390),
+])
+def test_int_float(test_value, expected_result):
+    result = argparse_types.int_float(test_value)
+    assert result == expected_result
+
+
+@pytest.mark.parametrize("test_value", [
+    "test45", "alpha", "5*6", "rt.78", "56 56", "99-34",
+])
+def test_int_float_fail(test_value):
+    _raises_test_case(argparse_types.int_float, test_value)
+
+
 @pytest.mark.parametrize("test_values, expected_results", [
     ("True", True),
     ("False", False),
